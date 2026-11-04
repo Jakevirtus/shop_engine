@@ -1,0 +1,27 @@
+[project]
+name = "shop_engine"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Alexander (Jakevirtus)",email = "alexanderlebedev339@gmail.com"}
+]
+requires-python = ">=3.13"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "alexander (jakevirtus) <alexanderlebedev339@gmail.com"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.2.0,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)",
+    "flake8 (>=7.5.0,<8.0.0)",
+    "isort (>=9.0.2,<10.0.0)"
+]
+[tool.pytest.ini_options]
+pythonpath = ["."]
