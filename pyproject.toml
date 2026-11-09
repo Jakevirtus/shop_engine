@@ -1,27 +1,27 @@
-[project]
+[tool.poetry]
 name = "shop_engine"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "Alexander (Jakevirtus)",email = "alexanderlebedev339@gmail.com"}
-]
-requires-python = ">=3.13"
-dependencies = [
-]
+description = "Core modular e-commerce engine for product and category management."
+authors = ["Александр (Jakevirtus) <alexanderlebedev339@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "src" }]
 
-[tool.poetry]
-packages = [{include = "alexander (jakevirtus) <alexanderlebedev339@gmail.com"}]
+[tool.poetry.dependencies]
+python = "^3.13"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.2.0"
+pytest-cov = "^7.1.0"
+flake8 = "^7.5.0"
+isort = "^9.0.2"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[dependency-groups]
-dev = [
-    "pytest (>=9.2.0,<10.0.0)",
-    "pytest-cov (>=7.1.0,<8.0.0)",
-    "flake8 (>=7.5.0,<8.0.0)",
-    "isort (>=9.0.2,<10.0.0)"
-]
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[tool.isort]
+profile = "black"
+line_length = 100
