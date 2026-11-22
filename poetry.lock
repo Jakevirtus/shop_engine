@@ -355,5 +355,5 @@ testing = ["process-tests", "pytest-xdist", "virtualenv"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.13"
-content-hash = "40524cd4d902c129981dafa3688c7a5607ada92a1a2223812584b264c04d37ec"
+python-versions = "^3.13"
+content-hash = "32d0a38c964707392d45f14e8045697bd20aae3044feb35c92bd844553a6e5fd"
