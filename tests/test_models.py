@@ -1,6 +1,8 @@
 from unittest.mock import patch
 
-from src.models import Category, Product
+import pytest
+
+from src.models import Category, CategoryIterator, Product
 
 
 def test_product_initialization():
@@ -80,7 +82,7 @@ def test_new_product_classmethod():
 
 
 def test_new_product_duplicate_bonus():
-    """Тест объединения дубликатов (доп. задание)."""
+    """Тест объединения дубликатов (доп.задание)."""
     existing_prod = Product("Ноутбук", "Мощный", 50000.0, 3)
     existing_list = [existing_prod]
 
@@ -94,3 +96,72 @@ def test_new_product_duplicate_bonus():
 
     assert product.quantity == 5
     assert product.price == 55000.0
+
+
+def test_product_str():
+    """Проверяет строковое представление товара."""
+    product = Product("Телефон", "Смартфон", 80000, 5)
+    expected = "Телефон, 80000 руб. Остаток: 5 шт."
+    assert str(product) == expected
+
+
+def test_category_str():
+    """Проверяет строковое представление категории."""
+    product1 = Product("Samsung", "Смартфон", 180000, 5)
+    product2 = Product("iPhone", "Смартфон", 210000, 8)
+
+    category = Category(
+        "Смартфоны",
+        "Мобильные телефоны",
+        [product1, product2]
+    )
+
+    expected = "Смартфоны, количество продуктов: 13 шт."
+
+    assert str(category) == expected
+
+
+def test_product_add():
+    """Проверяет сложение стоимости двух товаров."""
+    product1 = Product("Телефон", "Смартфон", 100, 10)
+    product2 = Product("Планшет", "Планшет", 200, 2)
+
+    expected = 1400
+
+    assert product1 + product2 == expected
+
+
+def test_category_iterator():
+    """Проверяет перебор товаров категории."""
+    product1 = Product("Samsung", "Смартфон", 180000, 5)
+    product2 = Product("iPhone", "Смартфон", 210000, 8)
+
+    category = Category(
+        "Смартфоны",
+        "Мобильные телефоны",
+        [product1, product2]
+    )
+
+    iterator = CategoryIterator(category)
+
+    products = list(iterator)
+
+    assert products == [product1, product2]
+
+
+def test_category_iterator_stop_iteration():
+    """Проверяет завершение перебора товаров."""
+    product = Product("Samsung", "Смартфон", 180000, 5)
+
+    category = Category(
+        "Смартфоны",
+        "Мобильные телефоны",
+        [product]
+    )
+
+    iterator = CategoryIterator(category)
+
+    assert next(iterator) is product
+
+    with pytest.raises(StopIteration):
+        next(iterator)
